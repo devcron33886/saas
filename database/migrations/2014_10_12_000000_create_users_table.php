@@ -11,7 +11,7 @@ return new class extends Migration
      *
      * @return void
      */
-    public function up()
+    public function up(): void
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
@@ -20,7 +20,9 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();
+            $table->foreignId('parent_id')->nullable()->references('id')->on('users');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
