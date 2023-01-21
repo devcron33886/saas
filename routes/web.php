@@ -84,4 +84,4 @@
         Route::post('account/profile/password', [\App\Http\Controllers\Customer\ProfileController::class, 'password'])->name('account.password');
     });
 
-    Route::stripeWebhooks('webhook-route-configured-at-the-stripe-dashboard');
+    Route::stripeWebhooks('stripe-webhook');
