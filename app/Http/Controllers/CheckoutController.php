@@ -10,7 +10,7 @@ class CheckoutController extends Controller
 {
     public function checkOut(Plan $plan)
     {
-        $currentPlan = auth()->user()->subscription('default')->stripe_plan ?? null;
+        $currentPlan = auth()->user()->subscription('default');
         if (! is_null($currentPlan) && $currentPlan != $currentPlan->stripe_identifier) {
             try {
                 auth()->user()->subscription('default')->swap($plan->stripe_identifier);

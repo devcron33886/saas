@@ -56,6 +56,7 @@ class CustomerController extends Controller
         abort_if(Gate::denies('customer_delete'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         $customer->delete();
+        
 
         return back();
     }

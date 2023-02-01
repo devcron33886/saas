@@ -1,4 +1,4 @@
-@extends('layouts.customers')
+@extends('layouts.app')
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
@@ -6,7 +6,7 @@
             @can('product_create')
                 <div style="margin-bottom: 10px;" class="row">
                     <div class="col-lg-12">
-                        <a class="btn btn-success" href="{{ route('customers.products.create') }}">
+                        <a class="btn btn-success" href="{{ route('customer.products.create') }}">
                             {{ trans('global.add') }} {{ trans('cruds.product.title_singular') }}
                         </a>
                     </div>
@@ -56,19 +56,19 @@
                                         </td>
                                         <td>
                                             @can('product_show')
-                                                <a class="btn btn-xs btn-primary" href="{{ route('customers.products.show', $product->id) }}">
+                                                <a class="btn btn-xs btn-primary" href="{{ route('customer.products.show', $product->id) }}">
                                                     {{ trans('global.view') }}
                                                 </a>
                                             @endcan
 
                                             @can('product_edit')
-                                                <a class="btn btn-xs btn-info" href="{{ route('customers.products.edit', $product->id) }}">
+                                                <a class="btn btn-xs btn-info" href="{{ route('customer.products.edit', $product->id) }}">
                                                     {{ trans('global.edit') }}
                                                 </a>
                                             @endcan
 
                                             @can('product_delete')
-                                                <form action="{{ route('customers.products.destroy', $product->id) }}" method="POST" onsubmit="return confirm('{{ trans('global.areYouSure') }}');" style="display: inline-block;">
+                                                <form action="{{ route('customer.products.destroy', $product->id) }}" method="POST" onsubmit="return confirm('{{ trans('global.areYouSure') }}');" style="display: inline-block;">
                                                     <input type="hidden" name="_method" value="DELETE">
                                                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                                     <input type="submit" class="btn btn-xs btn-danger" value="{{ trans('global.delete') }}">
@@ -98,7 +98,7 @@
   let deleteButtonTrans = '{{ trans('global.datatables.delete') }}'
   let deleteButton = {
     text: deleteButtonTrans,
-    url: "{{ route('customers.products.massDestroy') }}",
+    url: "{{ route('customer.products.massDestroy') }}",
     className: 'btn-danger',
     action: function (e, dt, node, config) {
       var ids = $.map(dt.rows({ selected: true }).nodes(), function (entry) {

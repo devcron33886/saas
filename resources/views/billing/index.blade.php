@@ -20,7 +20,7 @@
         <!-- Page body -->
         <div class="page-body">
             <div class="container-xl">
-                @if(is_null($currentPlan))
+                @if(!auth()->user()->subscription('default'))
                     <div class="alert alert-warning alert-dismissible">You are on free plan please upgrade</div>
                 @endif
                 @if (session('message'))
@@ -32,22 +32,21 @@
                             <div class="card">
                                 <div class="card-body">
                                     <h4 class="text-center">{{ $plan->name }}</h4>
-                                    {{ $plan->price }}
+                                    ${{ number_format($plan->price/100) }}
                                 </div>
                                 <div class="card-footer">
-
-                                    @if($plan->stripe_identifier == $currentPlan)
-                                        @if(!$currentPlan->onGracePeriod())
+                                    @if(auth()->user()->subscribedToPrice($plan->stripe_identifier,'default'))
+                                        @if(!auth()->user()->subscription('default')->onGracePeriod())
                                             <a href="{{ route('plan.cancel') }}" class="btn btn-danger"
                                                onclick="return confirm('Are you sure ?')">
                                                 Cancel Your Current plan
                                             </a>
                                         @else
                                             <div class="row">
-                                                <div class="col-6">
-                                                    Your subscription will end at {{ $currentPlan->ends_at }}
+                                                <div class="col-12">
+                                                    Your subscription will end at {{ auth()->user()->subscription('default')->ends_at }}
                                                 </div>
-                                                <div class="col-6">
+                                                <div class="col-12 mt-2">
                                                     <a href="{{ route('plan.resume') }}" class="btn btn-info">
                                                         Resume plan
                                                     </a>

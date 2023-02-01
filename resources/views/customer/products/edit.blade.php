@@ -1,4 +1,4 @@
-@extends('layouts.customers')
+@extends('layouts.app')
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
@@ -10,7 +10,7 @@
                 </div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route("customers.products.update", [$product->id]) }}" enctype="multipart/form-data">
+                    <form method="POST" action="{{ route("customer.products.update", [$product->id]) }}" enctype="multipart/form-data">
                         @method('PUT')
                         @csrf
                         <div class="form-group">

@@ -9,7 +9,7 @@ class BillingController extends Controller
     public function index()
     {
         $plans = Plan::where('status', true)->orderBy('price', 'ASC')->get();
-        $currentPlan = auth()->user()->subscription('default') ?? null;
+        $currentPlan = auth()->user()->subscription('default')->stripe_plan ?? null;
 
         return view('billing.index', compact('plans', 'currentPlan'));
     }
