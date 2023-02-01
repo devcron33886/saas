@@ -83,5 +83,3 @@
         Route::post('account/profile/destroy', [\App\Http\Controllers\Customer\ProfileController::class, 'destroy'])->name('account.destroy');
         Route::post('account/profile/password', [\App\Http\Controllers\Customer\ProfileController::class, 'password'])->name('account.password');
     });
-
-   Route::stripeWebhooks('stripe-webhook');
